@@ -1,6 +1,7 @@
 <?php
 
-  include_once('functions.php');
+    include_once('model/articles.php');
+    include_once('model/visits.php');
   $errEmpty = "";
   $errLength = "";
   $isSend = FALSE;
@@ -94,3 +95,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <hr>
 <a href="index.php">Move to main page</a>
+
+<? saveLogFile() ?>

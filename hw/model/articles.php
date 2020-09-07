@@ -1,26 +1,7 @@
 <?php
 
 
-function getLogs() : string {
 
-  $arr = getLogsFiles();
-
-  $str = file_get_contents("logs/$arr");
-
-  return $str;
-
-}
-
-function getLogsFiles(): array {
-  $files = scandir('logs');
-
-  $filesLog = array_filter($files, function ($f) {
-    return is_file("logs/$f") && preg_match('/.*\.log$/', $f);
-  });
-
-  return $filesLog;
-
-}
 
 //функция вывода информации, возвращает массив строк.
 
@@ -30,7 +11,7 @@ function getInfoPageAndUser() {
   $urlReferal = $_SERVER['HTTP_REFERER'] ?? "";
   $date = date("H:i:s");
 
-// IP-адрес пользователя
+  // IP-адрес пользователя
   $client  = @$_SERVER['HTTP_CLIENT_IP'];
   $forward = @$_SERVER['HTTP_X_FORWARDED_FOR'];
   $remote  = @$_SERVER['REMOTE_ADDR'];

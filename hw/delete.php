@@ -1,9 +1,11 @@
 <?php
 
-	include_once('functions.php');
+	include_once('model/articles.php');
+    include_once('model/visits.php');
 
 $errNoArticle = "";
 $removeArticleTrue = "";
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -26,3 +28,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 <hr>
 <a href="index.php">Move to main page</a>
+
+<? saveLogFile() ?>

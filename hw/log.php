@@ -1,9 +1,17 @@
 <?php
-include_once('functions.php');
+
+include_once('model/articles.php');
+include_once('model/visits.php');
+
 
 $log = (string)($_GET['log'] ?? '');
 
 $f = fopen("logs/$log", 'r');
+
+
+$arr = "";
+$style = "";
+$pattern = "/\s|and|php.*php/iu";
 
 ?>
 
@@ -22,9 +30,7 @@ $f = fopen("logs/$log", 'r');
 
   <tbody>
   <?
-  $arr = "";
-  $style = "";
-  $pattern = "/\s|and|php.*php/iu";
+
 
   while (!feof($f)) {
     $str = rtrim(fgets($f));
@@ -32,10 +38,10 @@ $f = fopen("logs/$log", 'r');
       $arr = explode(';', $str);
     }
 
-    if ((preg_match($pattern, $arr[2])) == TRUE) {
+    if ((!!preg_match($pattern, $arr[2])) == TRUE) {
       $style1 = "color:red";
     }
-    if ((preg_match($pattern, $arr[3])) == TRUE) {
+    if ((!!preg_match($pattern, $arr[3])) == TRUE) {
       $style2 = "color:red";
     }
     ?>
