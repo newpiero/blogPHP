@@ -1,7 +1,8 @@
 <?php
+declare(strict_types=1);
 
-include_once('model/db.php');
 include_once('model/func_articles.php');
+
 
 
 $errEmpty = "";
@@ -14,6 +15,7 @@ $isSend = FALSE;
   ];
 
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $isSend = TRUE;
   $fields['title'] = clean($_POST['title']);
@@ -24,21 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (!empty($fields['title']) && !empty($fields['content'])) {
     if (checkLength($fields['title'], 10, 1000) && checkLength($fields['content'], 10, 1000)) {
 
-      $db = new PDO('mysql:host=localhost;dbname=blog_db;charset=utf8', 'root', '');
-      $sql = "INSERT INTO articles (title, content) VALUES (:title, :content)";
-      $query = $db->prepare($sql);
-      $query->execute($fields);
-      $errInfo = $query->errorInfo();
 
-      $lastInsertIdArticle = $db->lastInsertId();
-
-      if ($errInfo[0] !== PDO::ERR_NONE) {
-        echo $errInfo[2];
-        exit();
-      }
-
+      articlesAdd($fields);
+      $lastInsertIdArticle = articleLastId();
       header("Location: article.php?id=$lastInsertIdArticle");
-
 
     }
     else {
@@ -55,7 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<div class="form">
+
+<div; class="form">
 
 
 

@@ -1,25 +1,31 @@
 <?php
+
+
+include_once("model/func_articles.php");
+
+$errNoArticle = "";
+$removeArticleTrue = "";
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-  $id = $_GET['id'];
+  $strId = $_GET['id'];
 
+  $id = (int) $strId;
 
-  $db = new PDO('mysql:host=localhost;dbname=blog_db;charset=utf8', 'root', '', [
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-  ]);
-  $sql = "SELECT * FROM articles WHERE id_article = :id_article";
-  $query = $db->prepare($sql);
-
-  $query->bindParam(':id_article', $id);
-  $query->execute();
-  $errInfo = $query->errorInfo();
-
-  if ($errInfo[0] !== PDO::ERR_NONE) {
-    echo $errInfo[2];
-    exit();
+  if (checkArticleId($id)) {
+    articleDelete($id);
+    $removeArticleTrue = "Статья успешно удалена";
+  } else {
+    $errNoArticle = "Статья не может быть удалена, так как её не существует";
   }
-
-  $articles = $query->fetchAll();
 }
 
 ?>
+
+<?=$errNoArticle?>
+<?=$removeArticleTrue?>
+
+
+<hr>
+<a href="index.php">Move to main page</a>

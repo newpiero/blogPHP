@@ -1,39 +1,31 @@
 <?php
-include_once("model/db.php");
+declare(strict_types=1);
 include_once("model/func_articles.php");
 
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-  $id = $_GET['id'];
+  $strId = $_GET['id'] ?? '';
+
+  $id = (int) $strId;
 
 
-  $db = new PDO('mysql:host=localhost;dbname=blog_db;charset=utf8', 'root', '', [
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-  ]);
-  $sql = "SELECT * FROM articles WHERE id_article = :id_article";
-  $query = $db->prepare($sql);
+  $article = articleOne($id);
 
-  $query->bindParam(':id_article', $id);
-  $query->execute();
-  $errInfo = $query->errorInfo();
-
-  if ($errInfo[0] !== PDO::ERR_NONE) {
-    echo $errInfo[2];
-    exit();
-  }
-
-  $articles = $query->fetchAll();
 }
 
+//$idd = checkArticleId($id);
+
 ?>
+
+<?//=$idd?>
 
 
 <div class="content">
 
-  <? foreach ($articles as $article):?>
-	<? if($article['id_article'] !== NULL): ?>
+
+	<? if($id !== NULL): ?>
 		<div class="article">
 			<h1><?=$article['title']?></h1>
 			<div><?=$article['content']?></div>
@@ -48,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 		</div>
 	<? endif; ?>
 
-  <? endforeach;?>
+
 </div>
 <hr>
 <a href="index.php">Move to main page</a>
