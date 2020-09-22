@@ -31,6 +31,12 @@ function articleDelete($id) : bool {
   return TRUE;
 }
 
+function articleUpdate(array $fields) : bool{
+  $sql = "UPDATE articles SET title = :title, content = :content WHERE id_article = :id";
+  dbQuery($sql, $fields);
+  return TRUE;
+}
+
 function articleLastId() {
   $db = dbConnect();
   $lastId = $db->lastInsertId();

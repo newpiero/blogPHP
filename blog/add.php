@@ -25,11 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if (!empty($fields['title']) && !empty($fields['content'])) {
     if (checkLength($fields['title'], 10, 1000) && checkLength($fields['content'], 10, 1000)) {
-
-
       articlesAdd($fields);
       $lastInsertIdArticle = articleLastId();
       header("Location: article.php?id=$lastInsertIdArticle");
+      exit();
 
     }
     else {

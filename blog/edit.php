@@ -5,11 +5,11 @@ include_once("model/func_articles.php");
   $errLength = "";
   $isSend = FALSE;
 
+$fields = [];
 
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
   $strId = $_GET['id'];
   $id = (int) $strId;
 
@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
   if (checkArticleId($id)) {
     $arr2 = articleOne($id);
-    print_r($arr2);
     $title = $arr2['title'];
     $content = $arr2['content'];
 
@@ -37,12 +36,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $id = (int) $strId;
 
   $isSend = TRUE;
-  $title = clean($_POST['title']);
-  $content = clean($_POST['content']);
 
-  if (!empty($title) && !empty($content)) {
-    if (checkLength($title, 10, 100) && checkLength($content, 35, 350)) {
-      editArticle($id, $title, $content);
+
+  $fields['title'] = clean($_POST['title']);
+  $fields['content'] = clean($_POST['content']);
+  $fields['id'] = $id;
+
+  if (!empty($fields['title']) && !empty($fields['content'])) {
+    if (checkLength($fields['title'], 10, 100) && checkLength($fields['content'], 35, 350)) {
+      articleUpdate($fields);
     }
     else {
       $isSend = FALSE;
