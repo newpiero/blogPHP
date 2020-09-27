@@ -28,4 +28,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 
 <hr>
-<a href="index.php">Move to main page</a>
+<a href="/">Move to main page</a>
