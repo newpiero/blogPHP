@@ -5,9 +5,9 @@
       <div><?=$article['content']?></div>
       <div><?=$article['id_category']?></div>
       <hr>
-      <a href="delete.php?id=<?=$article['id_article']?>">Remove</a>
+      <a href="?c=delete&id=<?=$article['id_article']?>">Remove</a>
       <br>
-      <a href="edit.php?id=<?=$article['id_article']?>">Edit</a>
+      <a href="?c=edit&id=<?=$article['id_article']?>">Edit</a>
     </div>
   <? else: ?>
     <div class="e404">
@@ -18,4 +18,4 @@
 
 </div>
 <hr>
-<a href="index.php">Move to main page</a>
+<a href="?c=front">Move to main page</a>

@@ -1,6 +1,8 @@
 <?php
 
 include_once("model/func_articles.php");
+include_once("model/func_categories.php");
+
 
 
 
@@ -8,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
   $id = $_GET['id'] ?? '';
 
-  if (/*checkArticleId && */checkId($id)) {
+  if (checkArticleId($id) && checkId($id)) {
        $id = (int) $id;
        $article = articleOne($id);
 
@@ -19,7 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
       exit();
     }
 
+
 }
+else {
+  $article = [
+    'title' => '',
+    'content' => '',
+  'id_category' => 0
+  ];
+
+
+}
+
 
 
 

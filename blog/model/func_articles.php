@@ -2,18 +2,11 @@
 //declare(strict_types=1);
 
 include_once('core/db.php');
-
-
+include_once('core/arr.php');
 
 
 function articlesAll() : array {
   $sql = "SELECT * FROM articles ORDER BY date_creation_article DESC";
-  $query = dbQuery($sql);
-  return $query->fetchAll();
-}
-
-function categoriesAll() : array {
-  $sql = "SELECT * FROM categories";
   $query = dbQuery($sql);
   return $query->fetchAll();
 }
@@ -55,12 +48,12 @@ function checkArticleId($id) : bool {
 
   if ($query->fetchColumn() > 0) {
     return TRUE;
-  } else return FALSE;
-//  $article = $query->fetch();
-//  if ($article !== null) {
-//    return TRUE;
-//  } else return FALSE;
+  }
+  else {
+    return FALSE;
+  }
 }
+
 
 function articleValidate($fields) : array {
   $errors = [];
@@ -84,11 +77,13 @@ function checkLength(string $value = "", int $minLength = 1, int $maxLength = 10
 function checkID($id) {
   $pattern = '/^[1-9]+\d*/';
   preg_match($pattern, $id, $array);
-  $res = $array[0];
-  if ($id == $res) {
+  $res = $array;
+  if ($id == $res[0]) {
     return TRUE;
   } else return FALSE;
 }
+
+
 
 
 

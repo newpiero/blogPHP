@@ -1,6 +1,7 @@
 <?php
 
 include_once("model/func_articles.php");
+include_once("model/func_categories.php");
 include_once("core/arr.php");
 
 
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (empty($validateErrors)) {
     articleUpdate($fields);
     $lastInsertIdArticle = articleLastId();
-    header("Location: ?c=article&?id=$id");
+    header("Location: ?c=article&id=$id");
     exit();
   }
 }
