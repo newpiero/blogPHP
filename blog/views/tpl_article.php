@@ -19,3 +19,5 @@
 </div>
 <hr>
 <a href="?c=front">Move to main page</a>
+
+<? saveLogFile(); ?>

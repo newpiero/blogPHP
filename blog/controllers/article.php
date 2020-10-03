@@ -2,6 +2,7 @@
 
 include_once("model/func_articles.php");
 include_once("model/func_categories.php");
+include_once("model/func_visits.php");
 
 
 
