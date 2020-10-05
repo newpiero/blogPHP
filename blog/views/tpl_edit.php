@@ -4,7 +4,7 @@
 
 
 
-    <h3>Вы редактируете статью "<?=$title?>"</h3>
+    <h3>Вы редактируете статью "<?=$fields['title']?>"</h3>
     <form method="post" class="editArcticle">
       <br>
       <p>Заголовок статьи</p>
@@ -17,20 +17,20 @@
               </option>
           <? endforeach; ?>
         </select>
-        <input type="text" name="title" placeholder="Введите заголовок" value="<?=$title?>">
+        <input type="text" name="title" placeholder="Введите заголовок" value="<?=$fields['title']?>">
 
       <br>
       <p>Текст статьи</p>
-        <textarea type="text" name="content" placeholder="Введите содержание статьи"><?=$content?></textarea>
+        <textarea type="text" name="content" placeholder="Введите содержание статьи"><?=$fields['content']?></textarea>
       <br>
       <br><br>
       <button type="submit">save article</button>
         <div class="error">
-          <? foreach ($validateErrors as $error): ?>
-
-              <p><?=$error?></p>
-
-          <? endforeach; ?>
+<!--          --><?// foreach ($validateErrors as $error): ?>
+<!---->
+<!--              <p>--><?//=$error?><!--</p>-->
+<!---->
+<!--          --><?// endforeach; ?>
 
         </div>
     </form>

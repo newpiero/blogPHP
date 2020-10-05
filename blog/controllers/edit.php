@@ -6,6 +6,7 @@ include_once("core/arr.php");
 
 
 $categories = categoriesAll();
+$validateErrors = [];
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -18,6 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $title = $fields['title'];
     $content = $fields['content'];
     $id_category = $fields['id_category'];
+
+      $pageTitle = $fields['title'];
+      $pageContent = template('tpl_edit', [
+          'categories' => $categories,
+          'fields' => $fields
+      ]);
   } else {
     $errNoArticle = "Статья не может быть отредактирована, так как её не существует";
   }
@@ -44,6 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $validateErrors = articleValidate($fields);
 
+
+    $pageTitle = $fields['title'];
+    $pageContent = template('tpl_edit', [
+        'categories' => $categories,
+        'fields' => $fields
+    ]);
+
   if (empty($validateErrors)) {
     articleUpdate($fields);
     $lastInsertIdArticle = articleLastId();
@@ -62,4 +76,4 @@ else {
 }
 
 
-include('views/tpl_edit.php');
+//include('views/tpl_edit.php');

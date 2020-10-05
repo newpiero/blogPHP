@@ -4,36 +4,16 @@ include_once("model/func_articles.php");
 include_once("model/func_categories.php");
 include_once("model/func_visits.php");
 
-
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-  $id = $_GET['id'] ?? '';
+    $id = $_GET['id'] ?? '';
+    $article = articleOne($id);
 
   if (checkArticleId($id) && checkId($id)) {
-       $id = (int) $id;
-       $article = articleOne($id);
-
-    include('views/tpl_article.php');
+        $id = (int) $id;
+          $pageTitle = $article['title'];
+          $pageContent = template('tpl_article', [
+              'article' => $article
+          ]);
     } else {
-      header('HTTP/1.1 404 Not Found');
-      include('errors/tpl_404.php');
-      exit();
+      $pageContent = template("base/tpl_404");
     }
-
-
-}
-else {
-  $article = [
-    'title' => '',
-    'content' => '',
-  'id_category' => 0
-  ];
-
-
-}
-
-
-
 

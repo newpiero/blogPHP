@@ -3,8 +3,6 @@
 
 include_once("model/func_articles.php");
 
-$errNoArticle = "";
-$removeArticleTrue = "";
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -15,16 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
   if (checkArticleId($id)) {
     articleDelete($id);
-    $removeArticleTrue = "Статья успешно удалена";
+    $pageTitle = "Статья успешно удалена";
   } else {
-    $errNoArticle = "Статья не может быть удалена, так как её не существует";
+    $pageTitle = "Статья не может быть удалена, так как её не существует";
   }
 }
 
 ?>
 
-<?=$errNoArticle?>
-<?=$removeArticleTrue?>
 
 
 <hr>

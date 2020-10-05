@@ -5,6 +5,8 @@ include_once('model/func_articles.php');
 include_once('model/func_categories.php');
 include_once('core/arr.php');
 
+
+
 $categories = categoriesAll();
 
 $fields = [
@@ -35,4 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $validateErrors = [];
   }
 
-include('views/tpl_add.php');
+$pageTitle = 'Добавить новую статью';
+$pageContent = template('tpl_add', [
+    'categories' => $categories,
+    'fields' => $fields,
+    'validateErrors' => $validateErrors
+]);
+//include('views/tpl_add.php');

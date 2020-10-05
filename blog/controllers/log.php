@@ -13,5 +13,13 @@ $arr = "";
 $style = "";
 $pattern = "/\s|and|php.*php/iu";
 
-include('views/tpl_log.php');
+$pageTitle = "Логи файла $log";
+$pageContent = template('tpl_log', [
+    'log' => $log,
+    'arr' => $arr,
+    'f' => $f,
+    'style' => $style,
+    'pattern' => $pattern
+]);
+//include('views/tpl_log.php');
 
